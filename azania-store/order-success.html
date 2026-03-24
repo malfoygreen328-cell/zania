@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Payment Successful - Azania</title>
+
+<style>
+body{
+font-family:Arial,sans-serif;
+background:#043927;
+margin:0;
+display:flex;
+justify-content:center;
+align-items:center;
+height:100vh;
+color:white;
+}
+
+.container{
+background:white;
+color:#043927;
+padding:40px;
+border-radius:10px;
+text-align:center;
+max-width:500px;
+}
+
+h1{
+color:#056848;
+}
+
+button{
+margin-top:20px;
+padding:12px 25px;
+background:#043927;
+color:white;
+border:none;
+border-radius:5px;
+cursor:pointer;
+}
+
+button:hover{
+background:#056848;
+}
+</style>
+</head>
+
+<body>
+
+<div class="container">
+
+<h1>✅ Payment Successful</h1>
+
+<p>Your payment was completed successfully.</p>
+<p>Your order is now being processed.</p>
+
+<button onclick="goHome()">Continue Shopping</button>
+
+</div>
+
+<script>
+
+/* Clear cart just in case */
+localStorage.removeItem("cart");
+
+/* Optional: clear last order if needed */
+// localStorage.removeItem("lastOrder");
+
+function goHome(){
+window.location.href = "index.html";
+}
+
+</script>
+
+</body>
+</html>

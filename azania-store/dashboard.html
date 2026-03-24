@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Azania Marketplace</title>
+
+<style>
+* { box-sizing:border-box; margin:0; padding:0; font-family:'Segoe UI', Arial, sans-serif;}
+body {background:#fff; color:#111;}
+
+/* NAVBAR */
+.navbar {
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    background:#043927;
+    padding:0.6rem 1rem;
+    color:white;
+    position:fixed;
+    width:100%;
+    top:0;
+    z-index:1000;
+}
+.nav-left, .nav-center, .nav-right {display:flex; align-items:center; gap:10px;}
+.nav-left {flex:1; justify-content:flex-start;}
+.nav-center {flex:1; justify-content:center;}
+.nav-right {flex:1; justify-content:flex-end; gap:0.6rem;}
+
+.logo {width:45px; cursor:pointer;}
+.hamburger {font-size:1.8rem; cursor:pointer; background:none; border:none; color:white; display:block;}
+#language-select {border-radius:5px; border:none; padding:0.3rem 0.5rem; min-width:130px;}
+
+/* Search input next to cart */
+#searchInput {padding:0.5rem; border-radius:6px; border:none; width:250px; max-width:50vw;}
+.icon-btn {background:#056848; border:none; padding:0.5rem; border-radius:6px; cursor:pointer; color:white;}
+.icon-btn:hover {background:#03291c;}
+
+/* LAYOUT */
+.container {display:flex; margin-top:70px;}
+
+/* SIDEBAR */
+.sidebar {width:220px; background:#043927; padding:1rem; height:calc(100vh-70px); position:sticky; top:70px; transition:transform 0.3s ease;}
+.sidebar h3 {margin-bottom:1rem; color:white;}
+.sidebar a {display:block; margin-bottom:0.7rem; text-decoration:none; color:white; font-weight:500; cursor:pointer;}
+.sidebar a:hover {color:#b0e0a8;}
+
+/* MAIN */
+main {flex:1; padding:1rem; max-width:1200px;}
+
+/* SLIDER */
+.slider {position:relative; overflow:hidden; border-radius:12px; margin-bottom:20px;}
+.slides {display:flex; transition:transform 0.5s ease;}
+.slide {min-width:100%;}
+.slide img {width:100%; height:350px; object-fit:cover;}
+.slider-btn {position:absolute; top:50%; transform:translateY(-50%); background:rgba(0,0,0,0.5); border:none; color:white; font-size:2rem; cursor:pointer;}
+.prev {left:10px;} .next {right:10px;}
+
+/* PRODUCTS */
+.products-grid {display:grid; grid-template-columns:repeat(auto-fill, minmax(220px,1fr)); gap:20px;}
+.product-card {border:1px solid #ddd; border-radius:10px; padding:0.7rem;}
+.product-card img {width:100%; border-radius:8px;}
+.product-title {font-weight:600; margin:0.5rem 0;}
+.product-price {color:#043927; font-weight:bold;}
+.add-cart-btn {margin-top:0.5rem; background:#043927; color:white; border:none; padding:0.4rem; border-radius:6px; cursor:pointer;}
+
+/* AI CHAT WIDGET */
+#ai-chat {position:fixed; bottom:20px; right:20px; width:300px; background:#043927; color:white; border:2px solid #03291c; border-radius:10px; padding:10px; z-index:2000; font-size:0.9rem;}
+#chat-messages {height:200px; overflow-y:auto; border-bottom:1px solid #03291c; margin-bottom:5px;}
+#chat-input {width:100%; padding:5px; border-radius:5px; border:none;}
+
+/* RESPONSIVE */
+@media screen and (max-width:900px){
+    .sidebar {position:fixed; left:0; top:70px; transform:translateX(-100%); z-index:999;}
+    .sidebar.show {transform:translateX(0);}
+    .hamburger {display:block;}
+    .container {flex-direction:column;}
+    main {max-width:100%;}
+    #searchInput {width:150px;}
+}
+</style>
+</head>
+
+<body>
+
+<!-- NAVBAR -->
+<header class="navbar">
+    <div class="nav-left">
+        <button class="hamburger" id="hamburger-btn">☰</button>
+        <select id="language-select">
+            <option value="en">English</option>
+            <option value="zu">Zulu</option>
+            <option value="xh">Xhosa</option>
+            <option value="tn">Tswana</option>
+            <option value="ve">Venda</option>
+            <option value="nr">Ndebele</option>
+            <option value="st">Southern Sotho</option>
+            <option value="nso">Northern Sotho</option>
+        </select>
+    </div>
+
+    <div class="nav-center">
+        <img src="A.jpg" class="logo" onclick="location.href='index.html'">
+    </div>
+
+    <div class="nav-right">
+        <input type="text" id="searchInput" placeholder="Search products...">
+        <button class="icon-btn" onclick="location.href='cart.html'">🛒</button>
+        <button class="icon-btn" onclick="location.href='ACC.html'">👤</button>
+    </div>
+</header>
+
+<!-- LAYOUT -->
+<div class="container">
+
+    <!-- SIDEBAR -->
+    <aside class="sidebar" id="sidebar">
+        <h3 id="sidebar-title">Categories</h3>
+        <a onclick="filterCategory('all')" id="cat-all">All</a>
+        <a onclick="filterCategory('clothing')" id="cat-clothing">Clothing</a>
+        <a onclick="filterCategory('shoes')" id="cat-shoes">Shoes</a>
+        <a onclick="filterCategory('accessories')" id="cat-accessories">Accessories</a>
+        <a onclick="filterCategory('new')" id="cat-new">New Arrivals</a>
+    </aside>
+
+    <!-- MAIN -->
+    <main>
+        <section class="slider">
+            <div class="slides" id="slides">
+                <div class="slide"><img src="Azania.png"></div>
+                <div class="slide"><img src="Azania.png"></div>
+                <div class="slide"><img src="Azania.png"></div>
+            </div>
+            <button class="slider-btn prev" id="prev">❮</button>
+            <button class="slider-btn next" id="next">❯</button>
+        </section>
+
+        <section class="products-grid" id="products"></section>
+    </main>
+</div>
+
+<!-- AI Chat Widget -->
+<div id="ai-chat">
+    <div id="chat-messages"></div>
+    <input id="chat-input" type="text" placeholder="Ask about products..."/>
+</div>
+
+<script>
+// Hamburger toggle
+const hamburger = document.getElementById('hamburger-btn');
+const sidebar = document.getElementById('sidebar');
+hamburger.addEventListener('click', ()=> sidebar.classList.toggle('show'));
+
+// Slider
+let index = 0;
+const slides = document.getElementById("slides");
+const totalSlides = document.querySelectorAll(".slide").length;
+document.getElementById("next").onclick = ()=>{ index=(index+1)%totalSlides; updateSlider(); };
+document.getElementById("prev").onclick = ()=>{ index=(index-1+totalSlides)%totalSlides; updateSlider(); };
+function updateSlider(){ slides.style.transform=`translateX(-${document.querySelector(".slide").clientWidth*index}px)`; }
+setInterval(()=>{ index=(index+1)%totalSlides; updateSlider(); }, 4000);
+
+// Products
+let allProducts = [];
+async function loadProducts(){
+    const container = document.getElementById("products");
+    container.innerHTML="Loading products...";
+    try{
+        const res = await fetch("http://localhost:5000/api/v1/public/products");
+        const data = await res.json();
+        allProducts = data;
+        renderProducts(allProducts);
+    }catch(err){ container.innerHTML="Failed to load products."; console.error(err);}
+}
+function renderProducts(products){
+    const lang = document.getElementById("language-select").value;
+    const t = translations[lang];
+    const container=document.getElementById("products");
+    container.innerHTML="";
+    products.forEach(p=>{
+        container.innerHTML+=`
+        <div class="product-card">
+            <img src="${p.image||'A.jpg'}">
+            <div class="product-title">${p.name}</div>
+            <div class="product-price">R${p.price}</div>
+            <button class="add-cart-btn">${t.addToCart}</button>
+        </div>`;
+    });
+}
+
+// Search
+document.getElementById("searchInput").addEventListener("input", e=>{
+    const term = e.target.value.toLowerCase();
+    renderProducts(allProducts.filter(p=>p.name.toLowerCase().includes(term)));
+});
+
+// Category filter
+function filterCategory(cat){
+    if(cat==='all') return renderProducts(allProducts);
+    renderProducts(allProducts.filter(p=>p.category===cat));
+    if(window.innerWidth<=900) sidebar.classList.remove('show');
+}
+
+// TRANSLATIONS
+const translations = {
+    en:{search:"Search products...", categories:"Categories", all:"All", clothing:"Clothing", shoes:"Shoes", accessories:"Accessories", newArrivals:"New Arrivals", addToCart:"Add to Cart"},
+    zu:{search:"Sesha imikhiqizo...", categories:"Izigaba", all:"Konke", clothing:"Izingubo", shoes:"Izicathulo", accessories:"Izinsiza", newArrivals:"Okusha", addToCart:"Faka ekalishini"},
+    xh:{search:"Khangela iimveliso...", categories:"Iindidi", all:"Zonke", clothing:"Iimpahla", shoes:"Izicathulo", accessories:"Izixhobo", newArrivals:"Ezintsha", addToCart:"Faka kwiCart"},
+    tn:{search:"Batla dithoto...", categories:"Mekgwa", all:"Tsona", clothing:"Dithoto", shoes:"Dihlopha", accessories:"Dithoto tse dingwe", newArrivals:"Dintshwa", addToCart:"Oketsa mo Kariting"},
+    ve:{search:"Khadza zwavhuḓi...", categories:"Madiru", all:"Zwoṱhe", clothing:"Mivhili", shoes:"Zwihulo", accessories:"Zwibveledzwa", newArrivals:"Zwinzhi zwashu", addToCart:"Iisa kha Cart"},
+    nr:{search:"Funani imikhiqizo...", categories:"Izigaba", all:"Konke", clothing:"Izingubo", shoes:"Izicathulo", accessories:"Izinsiza", newArrivals:"Okusha", addToCart:"Faka ekalishini"},
+    st:{search:"Batla dithoto...", categories:"Dikgato", all:"Tsona", clothing:"Dithoto", shoes:"Dihlopha", accessories:"Dithoto tse dingwe", newArrivals:"Dintshwa", addToCart:"Oketsa mo Kariting"},
+    nso:{search:"Batla dithoto...", categories:"Mehleng", all:"Tsona", clothing:"Dithoto", shoes:"Dihlopha", accessories:"Dithoto tse dingwe", newArrivals:"Dintshwa", addToCart:"Oketsa mo Kariting"}
+};
+function loadLanguage(lang){
+    const t = translations[lang] || translations['en'];
+    document.getElementById("searchInput").placeholder = t.search;
+    document.getElementById("sidebar-title").textContent = t.categories;
+    document.getElementById("cat-all").textContent = t.all;
+    document.getElementById("cat-clothing").textContent = t.clothing;
+    document.getElementById("cat-shoes").textContent = t.shoes;
+    document.getElementById("cat-accessories").textContent = t.accessories;
+    document.getElementById("cat-new").textContent = t.newArrivals;
+    document.querySelectorAll(".add-cart-btn").forEach(btn=> btn.textContent = t.addToCart);
+}
+document.getElementById("language-select").onchange = e=>{
+    const lang = e.target.value;
+    loadLanguage(lang);
+    localStorage.setItem("azaniaLang", lang);
+};
+
+// AI CHAT
+const chatInput = document.getElementById('chat-input');
+const chatMessages = document.getElementById('chat-messages');
+
+chatInput.addEventListener('keypress', async e=>{
+    if(e.key==='Enter'){
+        const userMessage = chatInput.value.trim();
+        if(!userMessage) return;
+        chatMessages.innerHTML += `<div><strong>You:</strong> ${userMessage}</div>`;
+        chatInput.value='';
+
+        const lang = document.getElementById("language-select").value;
+
+        try{
+            const res = await fetch('http://localhost:5000/api/v1/ai', {
+                method:'POST',
+                headers:{'Content-Type':'application/json'},
+                body: JSON.stringify({
+                    message: userMessage,
+                    language: lang,
+                    products: allProducts
+                })
+            });
+            const data = await res.json();
+            chatMessages.innerHTML += `<div><strong>AI:</strong> ${data.reply}</div>`;
+            chatMessages.scrollTop = chatMessages.scrollHeight;
+        }catch(err){
+            console.error(err);
+            chatMessages.innerHTML += `<div><strong>AI:</strong> Sorry, something went wrong.</div>`;
+        }
+    }
+});
+
+// Load saved language and products
+window.onload = ()=>{
+    const savedLang = localStorage.getItem("azaniaLang") || "en";
+    document.getElementById("language-select").value = savedLang;
+    loadLanguage(savedLang);
+    loadProducts();
+};
+</script>
+
+</body>
+</html>

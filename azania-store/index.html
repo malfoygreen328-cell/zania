@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Azania Marketplace</title>
+  <meta name="description" content="Azania Marketplace - Discover local clothing brands and shop fashion items online.">
+  <meta name="robots" content="index, follow">
+  <link rel="canonical" href="https://azaniaShop.com/">
+
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: 'Segoe UI', Arial, sans-serif;
+    }
+
+    body {
+      background: #e6f0ea; /* light bottle green */
+      color: #043927;
+    }
+
+    /* NAVBAR */
+    .navbar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      background: #043927;
+      padding: 0.7rem 1.5rem;
+      color: white;
+      position: fixed;
+      width: 100%;
+      top: 0;
+      z-index: 1000;
+    }
+
+    .navbar-left img {
+      height: 50px;
+    }
+
+    .navbar-right a {
+      background: #056848;
+      color: white;
+      padding: 0.5rem 1rem;
+      border-radius: 6px;
+      font-weight: 600;
+      text-decoration: none;
+    }
+
+    .navbar-right a:hover {
+      background: #06553d;
+    }
+
+    /* MAIN LANDING */
+    main {
+      padding-top: 90px;
+      max-width: 1200px;
+      margin: auto;
+    }
+
+    /* HERO SECTION */
+    .hero {
+      text-align: center;
+      margin: 50px 20px;
+    }
+
+    .hero h1 {
+      font-size: 2.5rem;
+      margin-bottom: 20px;
+      color: #043927;
+    }
+
+    .hero p {
+      font-size: 1.2rem;
+      margin-bottom: 30px;
+      color: #06553d;
+    }
+
+    .hero a {
+      display: inline-block;
+      background-color: #043927;
+      color: white;
+      padding: 12px 25px;
+      border-radius: 8px;
+      font-weight: 600;
+      text-decoration: none;
+      transition: 0.3s;
+    }
+
+    .hero a:hover {
+      background-color: #056848;
+    }
+
+    /* STATIC IMAGE BANNER */
+    .banner {
+      width: 100%;
+      max-width: 1200px;
+      margin: 50px auto;
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
+    }
+
+    .banner img {
+      width: 100%;
+      display: block;
+      border-radius: 12px;
+      object-fit: cover;
+    }
+
+    /* FOOTER */
+    footer {
+      text-align: center;
+      padding: 20px;
+      color: #06553d;
+      margin-top: 50px;
+      font-size: 0.9em;
+    }
+
+    @media (max-width: 640px) {
+      .hero h1 {
+        font-size: 2rem;
+      }
+
+      .hero p {
+        font-size: 1rem;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <!-- NAVBAR -->
+  <header class="navbar">
+    <div class="navbar-left">
+      <a href="index.html"><img src="A.jpg" alt="Azania Logo"></a>
+    </div>
+    <div class="navbar-right">
+      <a href="login.html">Login</a>
+    </div>
+  </header>
+
+  <main>
+    <!-- HERO SECTION -->
+    <section class="hero">
+      <h1>Welcome to Azania Marketplace</h1>
+      <p>Discover local clothing brands and shop unique fashion items online.</p>
+      <a href="signup.html">Get Started</a>
+    </section>
+
+    <!-- STATIC IMAGE BANNER -->
+    <section class="banner">
+      <img src="Azania.png" alt="Promotional Banner">
+    </section>
+  </main>
+
+  <footer>
+    &copy; 2026 Azania Marketplace
+  </footer>
+</body>
+
+</html

@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Payment Cancelled - Azania</title>
+
+<style>
+body{
+font-family:Arial,sans-serif;
+background:#043927;
+margin:0;
+display:flex;
+justify-content:center;
+align-items:center;
+height:100vh;
+color:white;
+}
+
+.container{
+background:white;
+color:#043927;
+padding:40px;
+border-radius:10px;
+text-align:center;
+max-width:500px;
+}
+
+h1{
+color:#c0392b;
+}
+
+button{
+margin-top:15px;
+padding:12px 25px;
+background:#043927;
+color:white;
+border:none;
+border-radius:5px;
+cursor:pointer;
+}
+
+button:hover{
+background:#056848;
+}
+
+.retry{
+background:#c0392b;
+}
+
+.retry:hover{
+background:#e74c3c;
+}
+</style>
+</head>
+
+<body>
+
+<div class="container">
+
+<h1>❌ Payment Cancelled</h1>
+
+<p>Your payment was not completed.</p>
+<p>You can try again or return to your cart.</p>
+
+<button class="retry" onclick="retryPayment()">Try Again</button>
+<br/>
+<button onclick="goCart()">Back to Cart</button>
+
+</div>
+
+<script>
+
+function retryPayment(){
+window.location.href = "checkout.html";
+}
+
+function goCart(){
+window.location.href = "cart.html";
+}
+
+</script>
+
+</body>
+</html>
